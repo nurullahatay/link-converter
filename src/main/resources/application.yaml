@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: link-converter
+
+server:
+  port: 8080
+
+
+couchbase:
+  host: localhost
+  username: Administrator
+  password: password
+  bucketName: linklog
+
+logging.level.com.couchbase: ERROR

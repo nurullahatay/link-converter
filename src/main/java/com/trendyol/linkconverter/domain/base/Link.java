@@ -1,0 +1,20 @@
+package com.trendyol.linkconverter.domain.base;
+
+
+import com.trendyol.linkconverter.domain.enums.Page;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+@AllArgsConstructor
+public abstract class Link {
+    private String urlHost;
+    private String deeplinkHost;
+    private Page page;
+
+    public abstract String getUrl();
+
+    public abstract String getDeeplink();
+}
