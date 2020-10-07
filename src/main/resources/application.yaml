@@ -13,3 +13,7 @@ couchbase:
   bucketName: linklog
 
 logging.level.com.couchbase: ERROR
+
+host:
+  deeplink : ty://
+  url : https://www.trendyol.com

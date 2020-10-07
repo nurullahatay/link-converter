@@ -8,7 +8,6 @@ import com.couchbase.client.java.codec.JacksonJsonSerializer;
 import com.couchbase.client.java.env.ClusterEnvironment;
 import com.couchbase.client.java.json.JsonValueModule;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -31,7 +30,6 @@ public class CouchbaseConfiguration {
                 .modules(new JsonValueModule())
                 .serializationInclusion(JsonInclude.Include.NON_NULL)
                 .build();
-        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
         ClusterEnvironment clusterEnvironment = ClusterEnvironment.builder()
                 .jsonSerializer(JacksonJsonSerializer.create(mapper))

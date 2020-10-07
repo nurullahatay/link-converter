@@ -1,22 +1,27 @@
 package com.trendyol.linkconverter.util;
 
+import com.trendyol.linkconverter.configuration.exception.ResolveQueryParamException;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 
+import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
+@Slf4j
 public class LinkUtils {
 
-    private static final String EQUALS_OPERATOR = "=";
-    private static final String SEPARATE_OPERATOR = "&";
-    private static final String ENCODE_CHARACTER = "%";
+    public static final String EQUALS_OPERATOR = "=";
+    public static final String SEPARATE_OPERATOR = "&";
+    public static final String QUERY_OPERATOR = "?";
+    public static final String PATH_OPERATOR = "/";
 
     private LinkUtils() {
     }
 
-    public static Map<String, String> getParameters(String query) {
+    public static Map<String, String> resolveQueryParameters(String query) {
         Map<String, String> parameters = new HashMap<>();
 
         try {
@@ -26,16 +31,17 @@ public class LinkUtils {
                     String key = StringUtils.substringBefore(pair, EQUALS_OPERATOR).toLowerCase();
                     String value = StringUtils.substringAfter(pair, EQUALS_OPERATOR);
 
-                    if (StringUtils.containsNone(value, ENCODE_CHARACTER)) {
-                        value = URLEncoder.encode(value, StandardCharsets.UTF_8.toString());
+                    if (!value.equals(URLDecoder.decode(value, StandardCharsets.UTF_8.toString()))) {
+                        value = URLDecoder.decode(value, StandardCharsets.UTF_8.toString());
                     }
+                    value = URLEncoder.encode(value, StandardCharsets.UTF_8.toString());
 
                     parameters.put(key, value);
                 }
             }
         } catch (Exception ex) {
-            //todo log and define dedicated exception
-            throw new RuntimeException(ex);
+            log.error("Error occured when query resolving, query: {} , exception: {}", query, ex);
+            throw new ResolveQueryParamException();
         }
         return parameters;
     }

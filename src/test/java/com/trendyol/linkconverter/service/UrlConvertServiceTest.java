@@ -1,10 +1,11 @@
 package com.trendyol.linkconverter.service;
 
+import com.trendyol.linkconverter.configuration.HostResource;
 import com.trendyol.linkconverter.controller.model.request.ConvertUrlToDeeplinkRequest;
 import com.trendyol.linkconverter.controller.model.response.DeeplinkResponse;
 import com.trendyol.linkconverter.domain.log.ConvertType;
 import com.trendyol.linkconverter.domain.log.Log;
-import com.trendyol.linkconverter.repository.LogService;
+import com.trendyol.linkconverter.repository.LinkLogService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
@@ -14,12 +15,16 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.BDDMockito.given;
 
 @ExtendWith(MockitoExtension.class)
 class UrlConvertServiceTest {
 
     @Mock
-    private LogService logService;
+    private LinkLogService linkLogService;
+
+    @Mock
+    private HostResource hostResource;
 
     @InjectMocks
     private UrlConvertService urlConvertService;
@@ -30,6 +35,8 @@ class UrlConvertServiceTest {
         String url = "https://www.trendyol.com/casio/saat-p-1925865?boutiqueId=439892&merchantId=105064";
         ConvertUrlToDeeplinkRequest convertUrlToDeeplinkRequest = new ConvertUrlToDeeplinkRequest(url);
 
+        given(hostResource.getDeeplink()).willReturn("ty://");
+
         //WHEN
         DeeplinkResponse deeplinkResponse = urlConvertService.convertToDeeplink(convertUrlToDeeplinkRequest);
 
@@ -38,7 +45,7 @@ class UrlConvertServiceTest {
         assertThat(deeplinkResponse.getDeeplink()).isEqualTo("ty://?Page=Product&ContentId=1925865&CampaignId=439892&MerchantId=105064");
 
         ArgumentCaptor<Log> acLog = ArgumentCaptor.forClass(Log.class);
-        Mockito.verify(logService).saveLog(acLog.capture());
+        Mockito.verify(linkLogService).saveLog(acLog.capture());
 
         Log log = acLog.getValue();
         assertThat(log.getConvertType()).isEqualTo(ConvertType.DEEPLINK);
@@ -52,6 +59,8 @@ class UrlConvertServiceTest {
         String url = "https://www.trendyol.com/casio/erkek-kol-saati-p-1925865";
         ConvertUrlToDeeplinkRequest convertUrlToDeeplinkRequest = new ConvertUrlToDeeplinkRequest(url);
 
+        given(hostResource.getDeeplink()).willReturn("ty://");
+
         //WHEN
         DeeplinkResponse deeplinkResponse = urlConvertService.convertToDeeplink(convertUrlToDeeplinkRequest);
 
@@ -60,7 +69,7 @@ class UrlConvertServiceTest {
         assertThat(deeplinkResponse.getDeeplink()).isEqualTo("ty://?Page=Product&ContentId=1925865");
 
         ArgumentCaptor<Log> acLog = ArgumentCaptor.forClass(Log.class);
-        Mockito.verify(logService).saveLog(acLog.capture());
+        Mockito.verify(linkLogService).saveLog(acLog.capture());
 
         Log log = acLog.getValue();
         assertThat(log.getConvertType()).isEqualTo(ConvertType.DEEPLINK);
@@ -74,6 +83,8 @@ class UrlConvertServiceTest {
         String url = "https://www.trendyol.com/casio/erkek-kol-saati-p-1925865?BoutiqueId=439892";
         ConvertUrlToDeeplinkRequest convertUrlToDeeplinkRequest = new ConvertUrlToDeeplinkRequest(url);
 
+        given(hostResource.getDeeplink()).willReturn("ty://");
+
         //WHEN
         DeeplinkResponse deeplinkResponse = urlConvertService.convertToDeeplink(convertUrlToDeeplinkRequest);
 
@@ -82,7 +93,7 @@ class UrlConvertServiceTest {
         assertThat(deeplinkResponse.getDeeplink()).isEqualTo("ty://?Page=Product&ContentId=1925865&CampaignId=439892");
 
         ArgumentCaptor<Log> acLog = ArgumentCaptor.forClass(Log.class);
-        Mockito.verify(logService).saveLog(acLog.capture());
+        Mockito.verify(linkLogService).saveLog(acLog.capture());
 
         Log log = acLog.getValue();
         assertThat(log.getConvertType()).isEqualTo(ConvertType.DEEPLINK);
@@ -96,6 +107,8 @@ class UrlConvertServiceTest {
         String url = "https://www.trendyol.com/casio/erkek-kol-saati-p-1925865?merchantId=105064";
         ConvertUrlToDeeplinkRequest convertUrlToDeeplinkRequest = new ConvertUrlToDeeplinkRequest(url);
 
+        given(hostResource.getDeeplink()).willReturn("ty://");
+
         //WHEN
         DeeplinkResponse deeplinkResponse = urlConvertService.convertToDeeplink(convertUrlToDeeplinkRequest);
 
@@ -104,7 +117,7 @@ class UrlConvertServiceTest {
         assertThat(deeplinkResponse.getDeeplink()).isEqualTo("ty://?Page=Product&ContentId=1925865&MerchantId=105064");
 
         ArgumentCaptor<Log> acLog = ArgumentCaptor.forClass(Log.class);
-        Mockito.verify(logService).saveLog(acLog.capture());
+        Mockito.verify(linkLogService).saveLog(acLog.capture());
 
         Log log = acLog.getValue();
         assertThat(log.getConvertType()).isEqualTo(ConvertType.DEEPLINK);
@@ -118,6 +131,8 @@ class UrlConvertServiceTest {
         String url = "https://www.trendyol.com/tum--urunler?q=elbise";
         ConvertUrlToDeeplinkRequest convertUrlToDeeplinkRequest = new ConvertUrlToDeeplinkRequest(url);
 
+        given(hostResource.getDeeplink()).willReturn("ty://");
+
         //WHEN
         DeeplinkResponse deeplinkResponse = urlConvertService.convertToDeeplink(convertUrlToDeeplinkRequest);
 
@@ -126,7 +141,7 @@ class UrlConvertServiceTest {
         assertThat(deeplinkResponse.getDeeplink()).isEqualTo("ty://?Page=Search&Query=elbise");
 
         ArgumentCaptor<Log> acLog = ArgumentCaptor.forClass(Log.class);
-        Mockito.verify(logService).saveLog(acLog.capture());
+        Mockito.verify(linkLogService).saveLog(acLog.capture());
 
         Log log = acLog.getValue();
         assertThat(log.getConvertType()).isEqualTo(ConvertType.DEEPLINK);
@@ -140,6 +155,8 @@ class UrlConvertServiceTest {
         String url = "https://www.trendyol.com/tum--urunler?q=ütü";
         ConvertUrlToDeeplinkRequest convertUrlToDeeplinkRequest = new ConvertUrlToDeeplinkRequest(url);
 
+        given(hostResource.getDeeplink()).willReturn("ty://");
+
         //WHEN
         DeeplinkResponse deeplinkResponse = urlConvertService.convertToDeeplink(convertUrlToDeeplinkRequest);
 
@@ -148,7 +165,7 @@ class UrlConvertServiceTest {
         assertThat(deeplinkResponse.getDeeplink()).isEqualTo("ty://?Page=Search&Query=%C3%BCt%C3%BC");
 
         ArgumentCaptor<Log> acLog = ArgumentCaptor.forClass(Log.class);
-        Mockito.verify(logService).saveLog(acLog.capture());
+        Mockito.verify(linkLogService).saveLog(acLog.capture());
 
         Log log = acLog.getValue();
         assertThat(log.getConvertType()).isEqualTo(ConvertType.DEEPLINK);
@@ -162,6 +179,8 @@ class UrlConvertServiceTest {
         String url = "https://www.trendyol.com/tum--urunler?q=%C3%BCt%C3%BC";
         ConvertUrlToDeeplinkRequest convertUrlToDeeplinkRequest = new ConvertUrlToDeeplinkRequest(url);
 
+        given(hostResource.getDeeplink()).willReturn("ty://");
+
         //WHEN
         DeeplinkResponse deeplinkResponse = urlConvertService.convertToDeeplink(convertUrlToDeeplinkRequest);
 
@@ -170,7 +189,7 @@ class UrlConvertServiceTest {
         assertThat(deeplinkResponse.getDeeplink()).isEqualTo("ty://?Page=Search&Query=%C3%BCt%C3%BC");
 
         ArgumentCaptor<Log> acLog = ArgumentCaptor.forClass(Log.class);
-        Mockito.verify(logService).saveLog(acLog.capture());
+        Mockito.verify(linkLogService).saveLog(acLog.capture());
 
         Log log = acLog.getValue();
         assertThat(log.getConvertType()).isEqualTo(ConvertType.DEEPLINK);
@@ -184,6 +203,8 @@ class UrlConvertServiceTest {
         String url = "https://www.trendyol.com/Hesabim/Favoriler";
         ConvertUrlToDeeplinkRequest convertUrlToDeeplinkRequest = new ConvertUrlToDeeplinkRequest(url);
 
+        given(hostResource.getDeeplink()).willReturn("ty://");
+
         //WHEN
         DeeplinkResponse deeplinkResponse = urlConvertService.convertToDeeplink(convertUrlToDeeplinkRequest);
 
@@ -192,7 +213,7 @@ class UrlConvertServiceTest {
         assertThat(deeplinkResponse.getDeeplink()).isEqualTo("ty://?Page=Home");
 
         ArgumentCaptor<Log> acLog = ArgumentCaptor.forClass(Log.class);
-        Mockito.verify(logService).saveLog(acLog.capture());
+        Mockito.verify(linkLogService).saveLog(acLog.capture());
 
         Log log = acLog.getValue();
         assertThat(log.getConvertType()).isEqualTo(ConvertType.DEEPLINK);
@@ -206,6 +227,8 @@ class UrlConvertServiceTest {
         String url = "https://www.trendyol.com/Hesabim/#/Siparislerim";
         ConvertUrlToDeeplinkRequest convertUrlToDeeplinkRequest = new ConvertUrlToDeeplinkRequest(url);
 
+        given(hostResource.getDeeplink()).willReturn("ty://");
+
         //WHEN
         DeeplinkResponse deeplinkResponse = urlConvertService.convertToDeeplink(convertUrlToDeeplinkRequest);
 
@@ -214,7 +237,7 @@ class UrlConvertServiceTest {
         assertThat(deeplinkResponse.getDeeplink()).isEqualTo("ty://?Page=Home");
 
         ArgumentCaptor<Log> acLog = ArgumentCaptor.forClass(Log.class);
-        Mockito.verify(logService).saveLog(acLog.capture());
+        Mockito.verify(linkLogService).saveLog(acLog.capture());
 
         Log log = acLog.getValue();
         assertThat(log.getConvertType()).isEqualTo(ConvertType.DEEPLINK);

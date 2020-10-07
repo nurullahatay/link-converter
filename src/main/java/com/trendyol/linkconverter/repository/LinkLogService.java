@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @AllArgsConstructor
-public class LogService {
+public class LinkLogService {
 
     private final Collection linkLogCollection;
 

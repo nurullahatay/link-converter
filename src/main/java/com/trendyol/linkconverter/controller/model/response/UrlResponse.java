@@ -3,6 +3,6 @@ package com.trendyol.linkconverter.controller.model.response;
 import lombok.Data;
 
 @Data
-public class DeeplinkResponse {
-    private final String deeplink;
+public class UrlResponse {
+    private final String url;
 }

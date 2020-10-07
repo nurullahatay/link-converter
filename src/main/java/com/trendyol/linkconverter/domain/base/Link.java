@@ -3,11 +3,9 @@ package com.trendyol.linkconverter.domain.base;
 
 import com.trendyol.linkconverter.domain.enums.Page;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-@Getter
-@Setter
+@Data
 @AllArgsConstructor
 public abstract class Link {
     private String urlHost;

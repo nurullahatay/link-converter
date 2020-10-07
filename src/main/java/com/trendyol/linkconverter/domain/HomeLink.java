@@ -2,23 +2,24 @@ package com.trendyol.linkconverter.domain;
 
 import com.trendyol.linkconverter.domain.base.Link;
 import com.trendyol.linkconverter.domain.enums.Page;
+import com.trendyol.linkconverter.util.LinkUtils;
 
 public class HomeLink extends Link {
 
-    public HomeLink(String urlHost, String deeplinkUrl, String query) {
+    public HomeLink(String urlHost, String deeplinkUrl) {
         super(urlHost, deeplinkUrl, Page.HOME);
     }
 
     @Override
     public String getUrl() {
-        return null;
+        return getUrlHost();
     }
 
     @Override
     public String getDeeplink() {
         StringBuilder deeplinkBuilder = new StringBuilder();
-        deeplinkBuilder.append(getDeeplinkHost()).append("://");
-        deeplinkBuilder.append("?Page=").append(getPage().getValue());
+        deeplinkBuilder.append(getDeeplinkHost()).append(LinkUtils.QUERY_OPERATOR);
+        deeplinkBuilder.append("Page").append(LinkUtils.EQUALS_OPERATOR).append(getPage().getValue());
         return deeplinkBuilder.toString();
     }
 }

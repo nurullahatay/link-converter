@@ -10,9 +10,9 @@ import javax.validation.constraints.Pattern;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ConvertUrlToDeeplinkRequest {
+public class ConvertDeeplinkToUrlRequest {
 
-    @NotEmpty(message = "validation.url.empty")
-    @Pattern(regexp = "^(https?)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]", message = "validation.url.invalid")
-    private String url;
+    @NotEmpty(message = "validation.deeplink.empty")
+    @Pattern(regexp = "^(ty?)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]", message = "validation.deeplink.invalid")
+    private String deeplink;
 }
