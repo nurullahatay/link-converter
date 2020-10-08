@@ -40,7 +40,7 @@ Create a bucket named **'linklog'** in Couchbase server.
 
 Clone repository
 
-    git clone https://github.com/nurullahatay/link-converter
+    git clone https://github.com/nurullahatay/link-converter.git
 
 Run application  
 ```
