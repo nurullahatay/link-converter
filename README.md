@@ -1,4 +1,4 @@
-#Link Converter Backend Application
+# Link Converter Backend Application
 
 ## 1. About the Project
 
@@ -123,7 +123,7 @@ $ mvn test
 
 ## 3. Algorithm
 
-####3.1 Url To Deeplink
+#### 3.1 Url To Deeplink
    Website has 2 main pages, so these pages must have equivalent deeplinks.
 
 
@@ -151,7 +151,7 @@ $ mvn test
 
     Other pages, which are not filtered as homepage, search page or product detail page, must be converted as empty homepage deeplink.3.  Other pages, which are not filtered as homepage, search page or product detail page, must be converted as empty homepage deeplink.
 
-####3.2 Deeplink To Url
+#### 3.2 Deeplink To Url
 
 The reverse of the rules for converting url to deeplink is valid.
 
