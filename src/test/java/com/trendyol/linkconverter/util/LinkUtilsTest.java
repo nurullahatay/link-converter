@@ -2,7 +2,6 @@ package com.trendyol.linkconverter.util;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -18,13 +17,10 @@ class LinkUtilsTest {
         Map<String, String> queryParameters = LinkUtils.resolveQueryParameters(query);
 
         //THEN
-        Map<String, String> queryParametersResult = new HashMap<>();
-        queryParametersResult.put("page", "Product");
-        queryParametersResult.put("contentid", "1925865");
-        queryParametersResult.put("campaignid", "439892");
-        queryParametersResult.put("merchantid", "105064");
-
-        assertThat(queryParameters).isEqualTo(queryParametersResult);
+        assertThat(queryParameters.get("page")).isEqualToIgnoringCase("Product");
+        assertThat(queryParameters.get("contentid")).isEqualToIgnoringCase("1925865");
+        assertThat(queryParameters.get("campaignid")).isEqualToIgnoringCase("439892");
+        assertThat(queryParameters.get("merchantid")).isEqualToIgnoringCase("105064");
     }
 
     @Test
@@ -36,11 +32,8 @@ class LinkUtilsTest {
         Map<String, String> queryParameters = LinkUtils.resolveQueryParameters(query);
 
         //THEN
-        Map<String, String> queryParametersResult = new HashMap<>();
-        queryParametersResult.put("page", "Search");
-        queryParametersResult.put("query", "%C3%BCt%C3%BC");
-
-        assertThat(queryParameters).isEqualTo(queryParametersResult);
+        assertThat(queryParameters.get("page")).isEqualToIgnoringCase("Search");
+        assertThat(queryParameters.get("query")).isEqualToIgnoringCase("%C3%BCt%C3%BC");
     }
 
 
@@ -53,10 +46,7 @@ class LinkUtilsTest {
         Map<String, String> queryParameters = LinkUtils.resolveQueryParameters(query);
 
         //THEN
-        Map<String, String> queryParametersResult = new HashMap<>();
-        queryParametersResult.put("page", "Search");
-        queryParametersResult.put("query", "%C3%BCt%C3%BC");
-
-        assertThat(queryParameters).isEqualTo(queryParametersResult);
+        assertThat(queryParameters.get("page")).isEqualToIgnoringCase("Search");
+        assertThat(queryParameters.get("query")).isEqualToIgnoringCase("%C3%BCt%C3%BC");
     }
 }

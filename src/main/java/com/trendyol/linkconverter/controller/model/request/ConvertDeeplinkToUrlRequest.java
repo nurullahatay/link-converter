@@ -13,6 +13,6 @@ import javax.validation.constraints.Pattern;
 public class ConvertDeeplinkToUrlRequest {
 
     @NotEmpty(message = "validation.deeplink.empty")
-    @Pattern(regexp = "^(ty?)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]", message = "validation.deeplink.invalid")
+    @Pattern(regexp = "^ty://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]", message = "validation.deeplink.invalid")
     private String deeplink;
 }

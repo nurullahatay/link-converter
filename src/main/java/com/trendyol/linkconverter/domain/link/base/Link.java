@@ -1,7 +1,7 @@
-package com.trendyol.linkconverter.domain.base;
+package com.trendyol.linkconverter.domain.link.base;
 
 
-import com.trendyol.linkconverter.domain.enums.Page;
+import com.trendyol.linkconverter.domain.link.enums.Page;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 

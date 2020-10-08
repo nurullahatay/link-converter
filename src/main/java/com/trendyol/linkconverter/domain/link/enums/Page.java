@@ -1,4 +1,4 @@
-package com.trendyol.linkconverter.domain.enums;
+package com.trendyol.linkconverter.domain.link.enums;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

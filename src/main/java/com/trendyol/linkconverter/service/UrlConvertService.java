@@ -4,13 +4,14 @@ import com.trendyol.linkconverter.configuration.HostResource;
 import com.trendyol.linkconverter.configuration.exception.ResolveUrlException;
 import com.trendyol.linkconverter.controller.model.request.ConvertUrlToDeeplinkRequest;
 import com.trendyol.linkconverter.controller.model.response.DeeplinkResponse;
-import com.trendyol.linkconverter.domain.HomeLink;
-import com.trendyol.linkconverter.domain.ProductLink;
-import com.trendyol.linkconverter.domain.SearchLink;
-import com.trendyol.linkconverter.domain.base.Link;
+import com.trendyol.linkconverter.domain.link.HomeLink;
+import com.trendyol.linkconverter.domain.link.ProductLink;
+import com.trendyol.linkconverter.domain.link.SearchLink;
+import com.trendyol.linkconverter.domain.link.base.Link;
 import com.trendyol.linkconverter.domain.log.ConvertType;
 import com.trendyol.linkconverter.domain.log.Log;
 import com.trendyol.linkconverter.repository.LinkLogService;
+import com.trendyol.linkconverter.util.LinkConstants;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -21,8 +22,6 @@ import java.net.URL;
 @RequiredArgsConstructor
 @Slf4j
 public class UrlConvertService {
-    private static final String PRODUCT_PARAM = "-p-";
-    private static final String ALL_PRODUCTS_PARAM = "tum--urunler";
 
     private final LinkLogService linkLogService;
     private final HostResource hostResource;
@@ -44,11 +43,11 @@ public class UrlConvertService {
             String query = linkUrl.getQuery();
             String deeplinkHost = hostResource.getDeeplink();
 
-            if (path.contains(PRODUCT_PARAM)) {
+            if (path.contains(LinkConstants.PRODUCT_PARAM)) {
                 return new ProductLink(host, deeplinkHost, path, query);
             }
 
-            if (path.contains(ALL_PRODUCTS_PARAM)) {
+            if (path.contains(LinkConstants.SEARCH_PARAM)) {
                 return new SearchLink(host, deeplinkHost, query);
             }
 

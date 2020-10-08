@@ -1,7 +1,7 @@
-package com.trendyol.linkconverter.domain;
+package com.trendyol.linkconverter.domain.link;
 
-import com.trendyol.linkconverter.domain.base.Link;
-import com.trendyol.linkconverter.domain.enums.Page;
+import com.trendyol.linkconverter.domain.link.base.Link;
+import com.trendyol.linkconverter.domain.link.enums.Page;
 import com.trendyol.linkconverter.util.LinkConstants;
 import com.trendyol.linkconverter.util.LinkUtils;
 import org.apache.commons.lang3.StringUtils;
