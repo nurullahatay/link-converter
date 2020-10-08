@@ -7,7 +7,7 @@ Link Converter app is the web service that helps others convert connections betw
 Web applications use URLs, mobile applications use deep links. Both apps use links to redirect specific locations within apps. When you want to redirect between apps, you need to convert URLs to deep links or deep links to URLs.
 
 A quick example for URL and deeplink:  
-URL: https://www.trendyol.com/Hesabim/Favoriler  
+URL: https://{YOUR_WEBSITE_URL}/Hesabim/Favoriler  
 Deeplink: ty://?Page=Home  
 
 #### Used technologies
@@ -69,7 +69,7 @@ $ mvn test
     
     ```
     {
-      "url": "https://www.trendyol.com/casio/saat-p-1925865?boutiqueId=439892&merchantId=105064"
+      "url": "https://{YOUR_WEBSITE_URL}/casio/saat-p-1925865?boutiqueId=439892&merchantId=105064"
     }
     ```
     Response
@@ -96,7 +96,7 @@ $ mvn test
     
     ```
     {
-      "url": "https://www.trendyol.com/brand/name-p-1925865?boutiqueId=439892"
+      "url": "https://{YOUR_WEBSITE_URL}/brand/name-p-1925865?boutiqueId=439892"
     }
     ```
 
